@@ -16,6 +16,7 @@ router.post(
 router.get('/api/products', ProductControllers.getAllProducts);
 
 router.get('/api/product/:productId', ProductControllers.getOneProduct);
+
 router.delete('/api/product/:productId', ProductControllers.deletedProduct);
 
 router.put(
@@ -24,5 +25,10 @@ router.put(
   validateRequest(productValidation.productUpdateValidationSchema),
   ProductControllers.updateProduct,
 );
-
+router.post(
+  '/api/duplicate/:productId',
+  //auth('user'),
+  validateRequest(productValidation.productUpdateValidationSchema),
+  ProductControllers.duplicateProduct,
+);
 export const ProductRoute = router;

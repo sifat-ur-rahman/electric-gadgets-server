@@ -102,10 +102,35 @@ const deletedProduct = async (
     next(err);
   }
 };
+
+const duplicateProduct = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const id = req.params.productId;
+    const duplicateProductData = req.body;
+    const result = await ProductService.duplicateProductFromDB(
+      id,
+      duplicateProductData,
+    );
+
+    res.status(200).json({
+      success: true,
+      statusCode: 200,
+      message: 'Course updated successfully',
+      data: result,
+    });
+  } catch (err) {
+    next(err);
+  }
+};
 export const ProductControllers = {
   createProduct,
   getAllProducts,
   getOneProduct,
   updateProduct,
   deletedProduct,
+  duplicateProduct,
 };

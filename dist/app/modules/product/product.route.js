@@ -19,4 +19,7 @@ router.delete('/api/product/:productId', product_controller_1.ProductControllers
 router.put('/api/product/:productId', 
 //auth('user'),
 (0, validateRequest_1.default)(product_validation_1.productValidation.productUpdateValidationSchema), product_controller_1.ProductControllers.updateProduct);
+router.post('/api/duplicate/:productId', 
+//auth('user'),
+(0, validateRequest_1.default)(product_validation_1.productValidation.productUpdateValidationSchema), product_controller_1.ProductControllers.duplicateProduct);
 exports.ProductRoute = router;

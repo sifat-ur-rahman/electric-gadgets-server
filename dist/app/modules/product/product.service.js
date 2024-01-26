@@ -20,9 +20,15 @@ var __rest = (this && this.__rest) || function (s, e) {
         }
     return t;
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ProductService = void 0;
+const mongoose_1 = __importDefault(require("mongoose"));
 const product_model_1 = require("./product.model");
+const AppError_1 = __importDefault(require("../../errors/AppError"));
+const http_status_1 = __importDefault(require("http-status"));
 const createProductIntoDB = (productData) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield product_model_1.Product.create(productData);
     return result;
@@ -91,10 +97,23 @@ const deleteOneProductFromDB = (id) => __awaiter(void 0, void 0, void 0, functio
     const result = yield product_model_1.Product.findByIdAndDelete(id);
     return result;
 });
+const duplicateProductFromDB = (id, duplicateProductData) => __awaiter(void 0, void 0, void 0, function* () {
+    const existingProduct = yield product_model_1.Product.findById(id);
+    if (!existingProduct) {
+        throw new AppError_1.default(http_status_1.default.NOT_FOUND, 'Product not found');
+    }
+    const productObject = existingProduct.toObject();
+    // Duplicate the product by creating a new
+    const duplicatedProduct = new product_model_1.Product(Object.assign(Object.assign(Object.assign({}, productObject), { _id: new mongoose_1.default.Types.ObjectId(), name: `${existingProduct.name}` }), duplicateProductData));
+    // Save the duplicated product to the database
+    const result = yield duplicatedProduct.save();
+    return result;
+});
 exports.ProductService = {
     createProductIntoDB,
     getAllProductsFromDB,
     getOneProductFromDB,
     updateProductFromDB,
     deleteOneProductFromDB,
+    duplicateProductFromDB,
 };

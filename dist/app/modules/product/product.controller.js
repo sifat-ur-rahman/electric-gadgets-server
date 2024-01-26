@@ -88,10 +88,27 @@ const deletedProduct = (req, res, next) => __awaiter(void 0, void 0, void 0, fun
         next(err);
     }
 });
+const duplicateProduct = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const id = req.params.productId;
+        const duplicateProductData = req.body;
+        const result = yield product_service_1.ProductService.duplicateProductFromDB(id, duplicateProductData);
+        res.status(200).json({
+            success: true,
+            statusCode: 200,
+            message: 'Course updated successfully',
+            data: result,
+        });
+    }
+    catch (err) {
+        next(err);
+    }
+});
 exports.ProductControllers = {
     createProduct,
     getAllProducts,
     getOneProduct,
     updateProduct,
     deletedProduct,
+    duplicateProduct,
 };
