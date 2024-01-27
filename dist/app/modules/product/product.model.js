@@ -13,6 +13,7 @@ exports.Product = void 0;
 const mongoose_1 = require("mongoose");
 const productSchema = new mongoose_1.Schema({
     name: { type: String, required: true },
+    img: { type: String, required: true },
     price: { type: Number, required: true },
     quantity: { type: Number, required: true },
     releaseDate: { type: Date, required: true },
