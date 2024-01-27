@@ -5,6 +5,7 @@ import { z } from 'zod';
 const productValidationSchema = z.object({
   body: z.object({
     name: z.string().min(1),
+    img: z.string(),
     price: z.number(),
     quantity: z.number(),
     releaseDate: z.string(),
@@ -29,6 +30,7 @@ const productValidationSchema = z.object({
 const productUpdateValidationSchema = z.object({
   body: z.object({
     name: z.string().optional(),
+    img: z.string().optional(),
     price: z.number().optional(),
     quantity: z.number().optional(),
     releaseDate: z.string().optional(),
