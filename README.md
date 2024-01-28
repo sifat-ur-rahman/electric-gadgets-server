@@ -1,8 +1,4 @@
-# assignment-4 course-review_auth
-
-## Server Live Link
-
-### https://course-review-auth-mu.vercel.app/
+# assignment-5 Electric gadgets Management Dashboard server
 
 ## Run the server application locally
 
