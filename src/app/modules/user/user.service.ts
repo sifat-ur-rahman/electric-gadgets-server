@@ -15,6 +15,7 @@ const userRegistrationIntoDB = async (Data: TUser) => {
   const jwtPayload = {
     userId: user?._id,
     email: user?.email,
+    name: user?.username,
     role: user?.role,
   };
 

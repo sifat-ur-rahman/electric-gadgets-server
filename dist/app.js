@@ -5,14 +5,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
-const sale_route_1 = require("./app/modules/category/sale.route");
+const sale_route_1 = require("./app/modules/sales/sale.route");
 const globalErrorHandler_1 = __importDefault(require("./app/middlewares/globalErrorHandler"));
 const product_route_1 = require("./app/modules/product/product.route");
 const user_route_1 = require("./app/modules/user/user.route");
 const auth_route_1 = require("./app/modules/auth/auth.route");
 const app = (0, express_1.default)();
 app.use(express_1.default.json());
-app.use((0, cors_1.default)());
+app.use((0, cors_1.default)({ origin: 'http://localhost:5173', credentials: true }));
 //application route.
 app.use('/', product_route_1.ProductRoute);
 app.use('/', sale_route_1.SaleRoute);
