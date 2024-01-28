@@ -17,7 +17,8 @@ router.get('/api/products', ProductControllers.getAllProducts);
 
 router.get('/api/product/:productId', ProductControllers.getOneProduct);
 
-router.delete('/api/product/:productId', ProductControllers.deletedProduct);
+router.delete('/api/product/:productId', ProductControllers.bulkDeletedProduct);
+router.delete('/api/bulk-delete', ProductControllers.bulkDeletedProduct);
 
 router.put(
   '/api/product/:productId',

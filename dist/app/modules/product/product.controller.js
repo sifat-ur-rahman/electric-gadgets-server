@@ -88,6 +88,23 @@ const deletedProduct = (req, res, next) => __awaiter(void 0, void 0, void 0, fun
         next(err);
     }
 });
+const bulkDeletedProduct = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { productsId } = req.body;
+        const result = yield product_service_1.ProductService.bulkDeletedProductFromDB(productsId);
+        if (result) {
+            res.status(200).json({
+                success: true,
+                statusCode: 200,
+                message: 'Bulk Deleted Product delete successfully',
+                data: null,
+            });
+        }
+    }
+    catch (err) {
+        next(err);
+    }
+});
 const duplicateProduct = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const id = req.params.productId;
@@ -111,4 +128,5 @@ exports.ProductControllers = {
     updateProduct,
     deletedProduct,
     duplicateProduct,
+    bulkDeletedProduct,
 };

@@ -109,6 +109,17 @@ const duplicateProductFromDB = (id, duplicateProductData) => __awaiter(void 0, v
     const result = yield duplicatedProduct.save();
     return result;
 });
+const bulkDeletedProductFromDB = (productsId) => __awaiter(void 0, void 0, void 0, function* () {
+    // Validate if itemIds array is provided
+    if (!productsId || !Array.isArray(productsId) || productsId.length === 0) {
+        throw new AppError_1.default(http_status_1.default.NOT_FOUND, 'Invalid itemIds in the request body');
+    }
+    // Perform bulk delete based on the provided itemIds
+    const result = yield product_model_1.Product.deleteMany({ _id: { $in: productsId } });
+    if (result.deletedCount > 0) {
+        return result;
+    }
+});
 exports.ProductService = {
     createProductIntoDB,
     getAllProductsFromDB,
@@ -116,4 +127,5 @@ exports.ProductService = {
     updateProductFromDB,
     deleteOneProductFromDB,
     duplicateProductFromDB,
+    bulkDeletedProductFromDB,
 };

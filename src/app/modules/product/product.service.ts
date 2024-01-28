@@ -135,6 +135,22 @@ const duplicateProductFromDB = async (
   const result = await duplicatedProduct.save();
   return result;
 };
+const bulkDeletedProductFromDB = async (productsId: string[]) => {
+  // Validate if itemIds array is provided
+  if (!productsId || !Array.isArray(productsId) || productsId.length === 0) {
+    throw new AppError(
+      httpStatus.NOT_FOUND,
+      'Invalid itemIds in the request body',
+    );
+  }
+
+  // Perform bulk delete based on the provided itemIds
+  const result = await Product.deleteMany({ _id: { $in: productsId } });
+
+  if (result.deletedCount > 0) {
+    return result;
+  }
+};
 export const ProductService = {
   createProductIntoDB,
   getAllProductsFromDB,
@@ -142,4 +158,5 @@ export const ProductService = {
   updateProductFromDB,
   deleteOneProductFromDB,
   duplicateProductFromDB,
+  bulkDeletedProductFromDB,
 };

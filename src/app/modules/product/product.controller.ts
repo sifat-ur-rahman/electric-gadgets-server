@@ -102,6 +102,27 @@ const deletedProduct = async (
     next(err);
   }
 };
+const bulkDeletedProduct = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const { productsId } = req.body;
+
+    const result = await ProductService.bulkDeletedProductFromDB(productsId);
+    if (result) {
+      res.status(200).json({
+        success: true,
+        statusCode: 200,
+        message: 'Bulk Deleted Product delete successfully',
+        data: null,
+      });
+    }
+  } catch (err) {
+    next(err);
+  }
+};
 
 const duplicateProduct = async (
   req: Request,
@@ -133,4 +154,5 @@ export const ProductControllers = {
   updateProduct,
   deletedProduct,
   duplicateProduct,
+  bulkDeletedProduct,
 };

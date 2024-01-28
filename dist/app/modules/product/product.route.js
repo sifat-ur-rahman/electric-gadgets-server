@@ -15,7 +15,8 @@ router.post('/api/product',
 (0, validateRequest_1.default)(product_validation_1.productValidation.productValidationSchema), product_controller_1.ProductControllers.createProduct);
 router.get('/api/products', product_controller_1.ProductControllers.getAllProducts);
 router.get('/api/product/:productId', product_controller_1.ProductControllers.getOneProduct);
-router.delete('/api/product/:productId', product_controller_1.ProductControllers.deletedProduct);
+router.delete('/api/product/:productId', product_controller_1.ProductControllers.bulkDeletedProduct);
+router.delete('/api/bulk-delete', product_controller_1.ProductControllers.bulkDeletedProduct);
 router.put('/api/product/:productId', 
 //auth('user'),
 (0, validateRequest_1.default)(product_validation_1.productValidation.productUpdateValidationSchema), product_controller_1.ProductControllers.updateProduct);
